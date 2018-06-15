@@ -2,166 +2,19 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
-* {
-  box-sizing: border-box;
-}
-
-/* style the container */
-.container {
-  position: relative;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px 0 30px 0;
-} 
-
-/* style inputs and link buttons */
-input,
-.btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
-  text-decoration: none; /* remove underline from anchors */
-}
-
-input:hover,
-.btn:hover {
-  opacity: 1;
-}
-
-/* add appropriate colors to fb, twitter and google buttons */
-.fb {
-  background-color: #3B5998;
-  color: white;
-}
-
-.twitter {
-  background-color: #55ACEE;
-  color: white;
-}
-
-.google {
-  background-color: #dd4b39;
-  color: white;
-}
-
-/* style the submit button */
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-/* Two-column layout */
-.col {
-  float: left;
-  width: 50%;
-  margin: auto;
-  padding: 0 50px;
-  margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* vertical line */
-.vl {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  border: 2px solid #ddd;
-  height: 175px;
-}
-
-/* text inside the vertical line */
-.vl-innertext {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 8px 10px;
-}
-
-/* hide some text on medium and large screens */
-.hide-md-lg {
-  display: none;
-}
-
-/* bottom container */
-.bottom-container {
-  text-align: center;
-  background-color: #666;
-  border-radius: 0px 0px 4px 4px;
-}
-
-/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 650px) {
-  .col {
-    width: 100%;
-    margin-top: 0;
-  }
-  /* hide the vertical line */
-  .vl {
-    display: none;
-  }
-  /* show the hidden text on small screens */
-  .hide-md-lg {
-    display: block;
-    text-align: center;
-  }
-}
-</style>
 
 </head>
 <body>
-<!--sailaja code
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '454409701685766',
-      xfbml      : true,
-      version    : 'v3.0'
-    });
-    FB.AppEvents.logPageView();
-  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-     alert('basin sdk loaded');
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
-sailaja code ENDS herre -->
+
 <!--BEGINS FOR FBLOGIN-->
 
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
+  
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -182,12 +35,15 @@ sailaja code ENDS herre -->
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
+  	
     FB.getLoginStatus(function(response) {
+    	
       statusChangeCallback(response);
     });
   }
 
   window.fbAsyncInit = function() {
+  
     FB.init({
       appId      : '454409701685766',
       cookie     : true,  // enable cookies to allow the server to access 
@@ -213,12 +69,15 @@ sailaja code ENDS herre -->
     });
 
   };
-
+//Step1: this is fired onpage load to initialize the JavaScript SDK
   // Load the SDK asynchronously
   (function(d, s, id) {
+ 
     var js, fjs = d.getElementsByTagName(s)[0];
+   
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
+   
     js.src = "https://connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
@@ -226,13 +85,44 @@ sailaja code ENDS herre -->
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
+ 
     console.log('Welcome!  Fetching your information.... ');
+    
+  
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
+      console.log('Successful login for: ' + response.email);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+  
+  function getInfo() {
+			FB.api('/me', 'GET', {fields: 								'first_name,email,last_name,name,id,picture.width(150).height(150)'}, function(response) 			{
+				document.getElementById('photo').innerHTML = "<img src='" + response.picture.data.url + "'>";
+                 document.getElementById('status').innerHTML =
+        'Full Name, ' + response.name + '!';
+        
+         document.getElementById('first_name').innerHTML =
+        'First Name, ' + response.first_name + '!';
+        
+        document.getElementById('last_name').innerHTML =
+        'Last Name, ' + response.last_name + '!';
+        
+        document.getElementById('id').innerHTML =
+        'Id, ' + response.id + '!';
+        
+         document.getElementById('email').innerHTML =
+        'email , ' + response.email + '!';
+        
+			});
+            
+            
+            
+		}
+	
+
+	
 </script>
 
 <!--
@@ -246,6 +136,25 @@ sailaja code ENDS herre -->
 
 <div id="status">
 </div>
+
+<div id="photo">
+</div>
+
+<div id="first_name">
+</div>
+
+<div id="last_name">
+</div>
+
+<div id="id">
+</div>
+
+<div id="email">
+</div>
+
+
+
+	<button onclick="getInfo()">Get info with picture</button>
 <!-- code lofin ends here-->
 <!-- code share  here-->
 <div
