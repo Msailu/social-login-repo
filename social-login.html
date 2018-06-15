@@ -93,7 +93,9 @@
       console.log('Successful login for: ' + response.name);
       console.log('Successful login for: ' + response.email);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+        'Thanks for logging in, ' + response.name ;
+      getInfo();
+		    
     });
   }
   
@@ -104,16 +106,13 @@
         'Full Name, ' + response.name + '!';
         
          document.getElementById('first_name').innerHTML =
-        'First Name, ' + response.first_name + '!';
+        'First Name, ' + response.first_name ;
         
         document.getElementById('last_name').innerHTML =
-        'Last Name, ' + response.last_name + '!';
-        
-        document.getElementById('id').innerHTML =
-        'Id, ' + response.id + '!';
+        'Last Name, ' + response.last_name ;
         
          document.getElementById('email').innerHTML =
-        'email , ' + response.email + '!';
+        'email , ' + response.email ;
         
 			});
             
@@ -152,9 +151,6 @@
 <div id="email">
 </div>
 
-
-
-	<button onclick="getInfo()">Get info with picture</button>
 <!-- code lofin ends here-->
 <!-- code share  here-->
 <div
