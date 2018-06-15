@@ -20,11 +20,42 @@
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
+        
+        document.getElementById('fullname').innerHTML =
+        'full name, ' + profile.getName() ;
+
+        document.getElementById('given_name').innerHTML =
+        'given_name, ' + profile.getGivenName() ;
+
+        document.getElementById('last_name').innerHTML =
+        'last_name, ' + profile.getFamilyName() ;
+
+        document.getElementById('email').innerHTML =
+        'email, ' + profile.getEmail() ;
+
+        document.getElementById('photo').innerHTML = "<img src='" + profile.getImageUrl() + "'>";
+        
 
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
       };
     </script>
+    
+    <div id="fullname">
+</div>
+
+<div id="given_name">
+</div>
+
+<div id="last_name">
+</div>
+
+<div id="email">
+</div>
+
+<div id="photo">
+</div>
+    
   </body>
 </html>
